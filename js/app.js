@@ -6,7 +6,7 @@ let cards = $(".card");
 let deck = document.getElementById("deck");
 //console.log(cards);
 $( "#restart" ).click(reset)
-//reset()
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -40,11 +40,15 @@ function reset() {
     console.log(cards[i]);
     deck.appendChild(cards[i]);
   }
-  $(".card").each(function() {
-    $(this).toggleClass("open", false);
-    $(this).toggleClass("match", false);
-    $(this).toggleClass("show", false);
-  });
+  //hide();
+}
+
+function hide() {
+    $(".card").each(function() {
+        $(this).toggleClass("open", false);
+        $(this).toggleClass("match", false);
+        $(this).toggleClass("show", false);
+      });
 }
 
 
