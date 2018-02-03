@@ -1,10 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
-
-let cards = $( ".card" );
-console.log(cards);
-
+//let cards = document.getElementsByClassName("card");
+let cards = $(".card");
+let deck = document.getElementById("deck");
+//console.log(cards);
+$( "#restart" ).click(reset)
+//reset()
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -12,22 +14,37 @@ console.log(cards);
  *   - add each card's HTML to the page
  */
 
-shuffle(cards);
-console.log(cards);
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
+}
+
+function reset() {
+  shuffle(cards);
+  cards.remove();
+  for (var i = 0; i < cards.length; i++) {
+    console.log(cards[i]);
+    deck.appendChild(cards[i]);
+  }
+  $(".card").each(function() {
+    $(this).toggleClass("open", false);
+    $(this).toggleClass("match", false);
+    $(this).toggleClass("show", false);
+  });
 }
 
 
