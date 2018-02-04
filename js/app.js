@@ -5,7 +5,13 @@
 let cards = $(".card");
 let deck = document.getElementById("deck");
 //console.log(cards);
-$( "#restart" ).click(reset)
+$("#restart").click(reset);
+
+//flip on click
+$("#deck").on("click", "li", function() {
+  $(this).toggleClass("show");
+  $(this).toggleClass("open");
+});
 
 /*
  * Display the cards on the page
@@ -13,8 +19,6 @@ $( "#restart" ).click(reset)
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -44,13 +48,12 @@ function reset() {
 }
 
 function hide() {
-    $(".card").each(function() {
-        $(this).toggleClass("open", false);
-        $(this).toggleClass("match", false);
-        $(this).toggleClass("show", false);
-      });
+  $(".card").each(function() {
+    $(this).toggleClass("open", false);
+    $(this).toggleClass("match", false);
+    $(this).toggleClass("show", false);
+  });
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
