@@ -40,7 +40,7 @@ function reset() {
     console.log(cards[i]);
     deck.appendChild(cards[i]);
   }
-  //hide();
+  hide();
 }
 
 function hide() {
