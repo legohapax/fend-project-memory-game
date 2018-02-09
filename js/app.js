@@ -6,11 +6,14 @@ let cards = $(".card");
 let deck = document.getElementById("deck");
 //console.log(cards);
 $("#restart").click(reset);
+let opened_cards = [];
 
 //flip on click
 $("#deck").on("click", "li", function() {
   $(this).toggleClass("show");
   $(this).toggleClass("open");
+
+  opened_cards.append($(this));
 });
 
 /*
@@ -54,6 +57,8 @@ function hide() {
     $(this).toggleClass("show", false);
   });
 }
+
+function opened_cards() {}
 
 /*
  * set up the event listener for a card. If a card is clicked:
