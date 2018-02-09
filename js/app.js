@@ -4,14 +4,24 @@
 //let cards = document.getElementsByClassName("card");
 let cards = $(".card");
 let deck = document.getElementById("deck");
+let displayed_cards = [];
 //console.log(cards);
 $("#restart").click(reset);
 
 //flip on click
 $("#deck").on("click", "li", function() {
-  $(this).toggleClass("show");
-  $(this).toggleClass("open");
+  display_symbol(this);
 });
+
+function display_symbol(card) {
+  $(card).toggleClass("show");
+  $(card).toggleClass("open");
+}
+
+function add_displayed_symbol(card) {
+
+
+}
 
 /*
  * Display the cards on the page
