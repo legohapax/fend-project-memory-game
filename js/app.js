@@ -7,21 +7,10 @@ let deck = document.getElementById("deck");
 let displayed_cards = [];
 //console.log(cards);
 $("#restart").click(reset);
-let opened_cards = [];
 
 //flip on click
 $("#deck").on("click", "li", function() {
-<<<<<<< HEAD
-  $(this).toggleClass("show");
-  $(this).toggleClass("open");
-
-  opened_cards.append($(this));
-||||||| merged common ancestors
-  $(this).toggleClass("show");
-  $(this).toggleClass("open");
-=======
   display_symbol(this);
->>>>>>> 9d7d4c7037764c75676fedca4d18503f4f33df15
 });
 
 function display_symbol(card) {
@@ -29,10 +18,7 @@ function display_symbol(card) {
   $(card).toggleClass("open");
 }
 
-function add_displayed_symbol(card) {
-
-
-}
+function add_displayed_symbol(card) {}
 
 /*
  * Display the cards on the page
@@ -75,8 +61,6 @@ function hide() {
     $(this).toggleClass("show", false);
   });
 }
-
-function opened_cards() {}
 
 /*
  * set up the event listener for a card. If a card is clicked:
