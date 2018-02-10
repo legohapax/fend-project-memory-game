@@ -11,6 +11,17 @@ $("#restart").click(reset);
 //flip on click
 $("#deck").on("click", "li", function() {
   display_symbol(this);
+  add_displayed_symbol(this);
+  //in case there is anything to compare:
+  if (displayed_cards.length == 2) {
+    card1_symbol = displayed_cards[0].children[0].className;
+    card2_symbol = displayed_cards[1].children[0].className;
+    //alert(card1_symbol + " " + card2_symbol);
+    //problem je, že když se resetuje, tak už tam není tenhle event listener - opravit, a nebo ne, je tam, chyba je jinde
+    if (card1_symbol !== card2_symbol) {
+      alert("pasuje");
+    }
+  }
 });
 
 function display_symbol(card) {
@@ -18,7 +29,12 @@ function display_symbol(card) {
   $(card).toggleClass("open");
 }
 
-function add_displayed_symbol(card) {}
+function add_displayed_symbol(card) {
+  //adds a card to the array only in case it isnt already there
+  if (!displayed_cards.includes(card)) {
+    displayed_cards.push(card);
+  }
+}
 
 /*
  * Display the cards on the page
