@@ -67,14 +67,14 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(180deg);
-    transition-duration: 1s;
+    transition-duration: 0.7s;
     background: #02b3e4;
     cursor: default;
 }
 
 .deck .card.wrongGuess {
     transform: rotateY(180deg);
-    transition-duration: 1s;
+    transition-duration: 0.7s;
     background: #d10909;
     cursor: default;
     font-size: 33px;
