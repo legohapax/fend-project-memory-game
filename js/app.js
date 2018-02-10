@@ -8,21 +8,44 @@ let displayed_cards = [];
 //console.log(cards);
 $("#restart").click(reset);
 
-//flip on click
+//card on click
+//card_on_click();
+//function card_on_click() {
 $("#deck").on("click", "li", function() {
   display_symbol(this);
   add_displayed_symbol(this);
+  // wrongly guessed cards flipped back
+  $(".wrongGuess").toggleClass("wrongGuess");
   //in case there is anything to compare:
   if (displayed_cards.length == 2) {
     card1_symbol = displayed_cards[0].children[0].className;
     card2_symbol = displayed_cards[1].children[0].className;
     //alert(card1_symbol + " " + card2_symbol);
     //problem je, že když se resetuje, tak už tam není tenhle event listener - opravit, a nebo ne, je tam, chyba je jinde
-    if (card1_symbol !== card2_symbol) {
-      alert("pasuje");
+    if (card1_symbol == card2_symbol) {
+      for (i = 0; i < 2; i++) {
+        lock_in_open_position(displayed_cards[i]);
+      }
+      displayed_cards = [];
+    } else {
+      for (i = 0; i < 2; i++) {
+        unsuccessful_guess(displayed_cards[i]);
+      }
+      displayed_cards = [];
     }
   }
 });
+//}
+
+function lock_in_open_position(card) {
+  $(card).toggleClass("match");
+}
+
+function unsuccessful_guess(card) {
+  $(card).toggleClass("show");
+  $(card).toggleClass("open");
+  $(card).toggleClass("wrongGuess");
+}
 
 function display_symbol(card) {
   $(card).toggleClass("show");
@@ -67,7 +90,9 @@ function reset() {
     console.log(cards[i]);
     deck.appendChild(cards[i]);
   }
+  //card_on_click();
   hide();
+  displayed_cards = [];
 }
 
 function hide() {
