@@ -48,6 +48,7 @@ $("#deck").on("click", "li", function() {
         plus_one_move();
       }
     }
+    if
   }
 });
 
