@@ -1,6 +1,8 @@
 /*
  * Create a list that holds all of your cards
  */
+//TODO - fixnout toceni prvni kartičky při wrong guess
+
 // global variables
 let cards = $(".card");
 let deck = document.getElementById("deck");
@@ -9,8 +11,10 @@ let counter_element = $("#moves");
 counter_element.text(0);
 let counter = 0;
 
+// start with reseted game
 reset();
 
+// button to reset the game
 $("#restart").click(reset);
 
 // card on click
@@ -73,13 +77,6 @@ function add_displayed_symbol(card) {
     displayed_cards.push(card);
   }
 }
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
