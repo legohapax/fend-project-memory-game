@@ -33,6 +33,16 @@ h1 {
     font-weight: 300;
 }
 
+h2 {
+    text-align: center;
+}
+
+button {
+    margin: auto;
+    display: block;
+    background-color: green;
+}
+
 /*
  * Styles for the deck of cards
  */

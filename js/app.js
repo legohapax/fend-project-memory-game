@@ -8,6 +8,7 @@ let cards = $(".card");
 let deck = document.getElementById("deck");
 let displayed_cards = [];
 let counter_element = $("#moves");
+let counter_matched_cards = 0;
 counter_element.text(0);
 let counter = 0;
 
@@ -38,6 +39,13 @@ $("#deck").on("click", "li", function() {
         for (i = 0; i < 2; i++) {
           lock_in_open_position(displayed_cards[i]);
         }
+        //how many matched cards are there
+        counter_matched_cards = $(".match").length;
+
+        if (counter_matched_cards === 16) {
+          // not a nice way how to postpone the execution of the functon
+          setTimeout("winning_the_game()", 3000);
+        }
         displayed_cards = [];
         plus_one_move();
       } else {
@@ -50,6 +58,22 @@ $("#deck").on("click", "li", function() {
     }
   }
 });
+
+function winning_the_game() {
+  $("ul").css("display", "none");
+  $("h1").text("Congrats! You won!");
+  $("body").append("<h2>You won with " + counter + " moves.</h2>");
+  $("body").append('<button id="play_again">Play again</button>');
+  $(".score-panel").css("display", "none");
+  $("#play_again").click(function() {
+    $("ul").css("display", "");
+    $("h1").text("Matching Game");
+    $("h2").remove();
+    $("button").remove();
+    $(".score-panel").css("display", "");
+    reset();
+  });
+}
 
 function plus_one_move() {
   counter++;
