@@ -42,7 +42,7 @@ $("#deck").on("click", "li", function() {
         //how many matched cards are there
         counter_matched_cards = $(".match").length;
 
-        if (counter_matched_cards === 16) {
+        if (counter_matched_cards === 2) {
           // not a nice way how to postpone the execution of the functon
           setTimeout("winning_the_game()", 3000);
         }
