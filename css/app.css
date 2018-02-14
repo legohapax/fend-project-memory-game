@@ -40,9 +40,10 @@ h2 {
 button {
     margin: auto;
     display: block;
-    background-color: green;
-    width: 200px;
-    height: 100px;
+    background-color: #02ccba;
+    width: 150px;
+    height: 75px;
+
 }
 
 /*

@@ -78,6 +78,18 @@ function winning_the_game() {
 function plus_one_move() {
   counter++;
   counter_element.text(counter);
+  if (counter === 10) {
+    $("#third_star").toggleClass("fa fa-star", false)
+    $("#third_star").toggleClass("fa fa-star-o", true) 
+  }
+  if (counter === 15) {
+    $("#second_star").toggleClass("fa fa-star", false)
+    $("#second_star").toggleClass("fa fa-star-o", true) 
+  }
+  if (counter === 20) {
+    $("#first_star").toggleClass("fa fa-star", false)
+    $("#first_star").toggleClass("fa fa-star-o", true) 
+  }
 }
 
 function lock_in_open_position(card) {
