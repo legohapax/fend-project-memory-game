@@ -11,6 +11,7 @@ let counter_element = $("#moves");
 let counter_matched_cards = 0;
 counter_element.text(0);
 let counter = 0;
+let counter_stars = $(".fa fa-star-o");
 
 // start with reseted game
 reset();
@@ -29,6 +30,10 @@ $("#deck").on("click", "li", function() {
     // wrongly guessed cards flipped back
     $(".wrongGuess").toggleClass("wrongGuess");
 
+    //how many stars are there
+    counter_stars = $(".fa-star").length;
+    
+
     // in case there is anything to compare:
     if (displayed_cards.length == 2) {
       card1_symbol = displayed_cards[0].children[0].className;
@@ -41,8 +46,9 @@ $("#deck").on("click", "li", function() {
         }
         //how many matched cards are there
         counter_matched_cards = $(".match").length;
+        
 
-        if (counter_matched_cards === 2) {
+        if (counter_matched_cards === 16) {
           // not a nice way how to postpone the execution of the functon
           setTimeout("winning_the_game()", 3000);
         }
@@ -62,7 +68,7 @@ $("#deck").on("click", "li", function() {
 function winning_the_game() {
   $("ul").css("display", "none");
   $("h1").text("Congrats! You won!");
-  $("body").append("<h2>You won with " + counter + " moves.</h2>");
+  $("body").append("<h2>You won with " + counter + " moves and with " + counter_stars + " stars.</h2>");
   $("body").append('<button id="play_again">Play again</button>');
   $(".score-panel").css("display", "none");
   $("#play_again").click(function() {
@@ -71,6 +77,8 @@ function winning_the_game() {
     $("h2").remove();
     $("button").remove();
     $(".score-panel").css("display", "");
+    $(".fa").toggleClass("fa-star-o", false)
+    $(".fa").toggleClass("fa-star", true)
     reset();
   });
 }
@@ -79,16 +87,16 @@ function plus_one_move() {
   counter++;
   counter_element.text(counter);
   if (counter === 10) {
-    $("#third_star").toggleClass("fa fa-star", false)
-    $("#third_star").toggleClass("fa fa-star-o", true) 
+    $("#third_star").toggleClass("fa-star", false)
+    $("#third_star").toggleClass("fa-star-o", true) 
   }
   if (counter === 15) {
-    $("#second_star").toggleClass("fa fa-star", false)
-    $("#second_star").toggleClass("fa fa-star-o", true) 
+    $("#second_star").toggleClass("fa-star", false)
+    $("#second_star").toggleClass("fa-star-o", true) 
   }
   if (counter === 20) {
-    $("#first_star").toggleClass("fa fa-star", false)
-    $("#first_star").toggleClass("fa fa-star-o", true) 
+    $("#first_star").toggleClass("fa-star", false)
+    $("#first_star").toggleClass("fa-star-o", true) 
   }
 }
 
