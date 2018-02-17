@@ -12,9 +12,13 @@ let counter_matched_cards = 0;
 counter_element.text(0);
 let counter = 0;
 let counter_stars = $(".fa fa-star-o");
+let date = new Date().getTime();
+let seconds_since_start = 0;
 
 // start with reseted game
 reset();
+
+timer();
 
 // button to reset the game
 $("#restart").click(reset);
@@ -32,7 +36,6 @@ $("#deck").on("click", "li", function() {
 
     //how many stars are there
     counter_stars = $(".fa-star").length;
-    
 
     // in case there is anything to compare:
     if (displayed_cards.length == 2) {
@@ -46,7 +49,6 @@ $("#deck").on("click", "li", function() {
         }
         //how many matched cards are there
         counter_matched_cards = $(".match").length;
-        
 
         if (counter_matched_cards === 16) {
           // not a nice way how to postpone the execution of the functon
@@ -68,17 +70,27 @@ $("#deck").on("click", "li", function() {
 function winning_the_game() {
   $("ul").css("display", "none");
   $("h1").text("Congrats! You won!");
-  $("body").append("<h2>You won with " + counter + " moves and with " + counter_stars + " stars.</h2>");
+  $("footer").css("display", "none");
+  $("body").append(
+    "<h2>You won with " +
+      counter +
+      " moves and with " +
+      counter_stars +
+      " stars in " +
+      seconds_since_start +
+      " seconds.</h2>"
+  );
   $("body").append('<button id="play_again">Play again</button>');
   $(".score-panel").css("display", "none");
   $("#play_again").click(function() {
     $("ul").css("display", "");
+    $("footer").css("display", "");
     $("h1").text("Matching Game");
     $("h2").remove();
     $("button").remove();
     $(".score-panel").css("display", "");
-    $(".fa").toggleClass("fa-star-o", false)
-    $(".fa").toggleClass("fa-star", true)
+    $(".fa").toggleClass("fa-star-o", false);
+    $(".fa").toggleClass("fa-star", true);
     reset();
   });
 }
@@ -87,16 +99,16 @@ function plus_one_move() {
   counter++;
   counter_element.text(counter);
   if (counter === 10) {
-    $("#third_star").toggleClass("fa-star", false)
-    $("#third_star").toggleClass("fa-star-o", true) 
+    $("#third_star").toggleClass("fa-star", false);
+    $("#third_star").toggleClass("fa-star-o", true);
   }
   if (counter === 15) {
-    $("#second_star").toggleClass("fa-star", false)
-    $("#second_star").toggleClass("fa-star-o", true) 
+    $("#second_star").toggleClass("fa-star", false);
+    $("#second_star").toggleClass("fa-star-o", true);
   }
   if (counter === 20) {
-    $("#first_star").toggleClass("fa-star", false)
-    $("#first_star").toggleClass("fa-star-o", true) 
+    $("#first_star").toggleClass("fa-star", false);
+    $("#first_star").toggleClass("fa-star-o", true);
   }
 }
 
@@ -152,6 +164,9 @@ function reset() {
   // counter to zero
   counter = 0;
   counter_element.text(counter);
+  date = new Date().getTime();
+  $(".fa").toggleClass("fa-star-o", false);
+  $(".fa").toggleClass("fa-star", true);
 }
 
 function hide() {
@@ -161,6 +176,22 @@ function hide() {
     $(this).toggleClass("show", false);
     $(this).toggleClass("wrongGuess", false);
   });
+}
+
+function timer() {
+  // Update the count every 1 second
+  let x = setInterval(function() {
+    // Get todays date and time
+    let now = new Date().getTime();
+
+    // Find the distance between now an the count down date
+    let distance = now - date;
+
+    seconds_since_start = Math.round(distance / 1000);
+
+    // Display the result in the element with id="timer"
+    document.getElementById("timer").innerHTML = seconds_since_start;
+  }, 1000);
 }
 
 /*
