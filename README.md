@@ -6,15 +6,26 @@
 * [Contributing](#contributing)
 
 ## Instructions
+To get started, open `js/app.js`.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+### How the game is played
+By clicking on a card you flip it. The symbola appears. Your task is to find two matching symbols. In case you find them you are finished with a given symbol and you should continue with other ones. As soon as you find all 8 matching symbols, you win!
 
-To get started, open `js/app.js` and start building out the app's functionality
+### What can you expect from the game
+You can expect a lot of fun and excitement.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Dependencies
+There are no dependencies.
 
-## Contributing
+##  Resources used to develop the game
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+I forked the udacity starter code from here: https://github.com/udacity/fend-project-memory-game
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+I got inspired by a lot of code online such as: https://www.w3schools.com/howto/howto_js_countdown.asp or: http://stackoverflow.com/a/2450976 .
+
+
+
+
+    
+    
+   

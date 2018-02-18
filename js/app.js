@@ -11,7 +11,7 @@ let counter_element = $("#moves");
 let counter_matched_cards = 0;
 counter_element.text(0);
 let counter = 0;
-let counter_stars = $(".fa fa-star-o");
+let counter_stars = 3;
 let date = new Date().getTime();
 let seconds_since_start = 0;
 
@@ -33,9 +33,6 @@ $("#deck").on("click", "li", function() {
 
     // wrongly guessed cards flipped back
     $(".wrongGuess").toggleClass("wrongGuess");
-
-    //how many stars are there
-    counter_stars = $(".fa-star").length;
 
     // in case there is anything to compare:
     if (displayed_cards.length == 2) {
@@ -101,14 +98,17 @@ function plus_one_move() {
   if (counter === 10) {
     $("#third_star").toggleClass("fa-star", false);
     $("#third_star").toggleClass("fa-star-o", true);
+    counter_stars = 2;
   }
   if (counter === 15) {
     $("#second_star").toggleClass("fa-star", false);
     $("#second_star").toggleClass("fa-star-o", true);
+    counter_stars = 1;
   }
   if (counter === 20) {
     $("#first_star").toggleClass("fa-star", false);
     $("#first_star").toggleClass("fa-star-o", true);
+    counter_stars = 0;
   }
 }
 
@@ -181,10 +181,10 @@ function hide() {
 function timer() {
   // Update the count every 1 second
   let x = setInterval(function() {
-    // Get todays date and time
+    // Get time "now"
     let now = new Date().getTime();
 
-    // Find the distance between now an the count down date
+    // Find the distance between now and starting time
     let distance = now - date;
 
     seconds_since_start = Math.round(distance / 1000);
