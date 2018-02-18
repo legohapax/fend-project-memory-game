@@ -14,11 +14,11 @@ let counter = 0;
 let counter_stars = 3;
 let date = new Date().getTime();
 let seconds_since_start = 0;
+let counter_clicks = 0;
+let x;
 
 // start with reseted game
 reset();
-
-timer();
 
 // button to reset the game
 $("#restart").click(reset);
@@ -26,7 +26,11 @@ $("#restart").click(reset);
 // card on click
 $("#deck").on("click", "li", function() {
   // this function applies only to cards which arent already matched
-
+  counter_clicks++;
+  if (counter_clicks === 1) {
+    date = new Date().getTime();
+    timer();
+  }
   if (!$(this).hasClass("match")) {
     display_symbol(this);
     add_displayed_symbol(this);
@@ -64,6 +68,7 @@ $("#deck").on("click", "li", function() {
   }
 });
 
+// executes when user matches all the symbols
 function winning_the_game() {
   $("ul").css("display", "none");
   $("h1").text("Congrats! You won!");
@@ -79,6 +84,8 @@ function winning_the_game() {
   );
   $("body").append('<button id="play_again">Play again</button>');
   $(".score-panel").css("display", "none");
+
+  // if user wants to play again - display all that is hidden
   $("#play_again").click(function() {
     $("ul").css("display", "");
     $("footer").css("display", "");
@@ -92,6 +99,7 @@ function winning_the_game() {
   });
 }
 
+// plus one move shows number of moves and handles the star rating
 function plus_one_move() {
   counter++;
   counter_element.text(counter);
@@ -105,29 +113,27 @@ function plus_one_move() {
     $("#second_star").toggleClass("fa-star-o", true);
     counter_stars = 1;
   }
-  if (counter === 20) {
-    $("#first_star").toggleClass("fa-star", false);
-    $("#first_star").toggleClass("fa-star-o", true);
-    counter_stars = 0;
-  }
 }
 
+// matched cards stay open
 function lock_in_open_position(card) {
   $(card).toggleClass("match");
 }
 
+// unmatching cards are flipped
 function unsuccessful_guess(card) {
   $(card).toggleClass("show");
   $(card).toggleClass("open");
   $(card).toggleClass("wrongGuess");
 }
 
+// display symbol of the card
 function display_symbol(card) {
   $(card).toggleClass("show");
   $(card).toggleClass("open");
 }
 
-//adds a card to the array only in case it isnt already there
+// adds a card to the array only in case it isnt already there
 function add_displayed_symbol(card) {
   if (!displayed_cards.includes(card)) {
     displayed_cards.push(card);
@@ -151,9 +157,11 @@ function shuffle(array) {
   return array;
 }
 
+// reset button fucntionality
 function reset() {
   shuffle(cards);
   cards.remove();
+  counter_clicks = 0;
   for (var i = 0; i < cards.length; i++) {
     console.log(cards[i]);
     deck.appendChild(cards[i]);
@@ -164,10 +172,15 @@ function reset() {
   // counter to zero
   counter = 0;
   counter_element.text(counter);
-  date = new Date().getTime();
+  // stops timer
+  clearInterval(x);
+  // sets timer to zero
+  document.getElementById("timer").innerHTML = 0;
+
   $(".fa").toggleClass("fa-star-o", false);
   $(".fa").toggleClass("fa-star", true);
 }
+
 // hides all cards
 function hide() {
   $(".card").each(function() {
@@ -178,9 +191,10 @@ function hide() {
   });
 }
 
+// sets the timer and shows elapsed time every second
 function timer() {
   // Update the count every 1 second
-  let x = setInterval(function() {
+  x = setInterval(function() {
     // Get time "now"
     let now = new Date().getTime();
 
